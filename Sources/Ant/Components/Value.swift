@@ -308,7 +308,13 @@ extension Value {
         case .X:                return icalvalue_get_x(origin).hub.wrap()
         case .XLICCLASS:        return icalvalue_get_xlicclass(origin).hub.wrap()
         case .NO:               return nil
-        default:                return icalvalue_as_ical_string(origin)
+        default:                return icalvalue_as_ical_string(origin).hub.wrap()
         }
+    }
+    
+    /// fetchAny
+    /// - Returns:  T?
+    public func fetchAny<T>() -> T? {
+        return rawValue as? T
     }
 }

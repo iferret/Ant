@@ -72,6 +72,14 @@ extension Property {
         icalproperty_set_value(origin, value.origin)
     }
     
+    /// setValue
+    /// - Parameters:
+    ///   - value: String
+    ///   - kind: Wrap<icalvalue_kind>
+    public func setValue(_ value: String, kind: Wrap<icalvalue_kind>) {
+        icalproperty_set_value_from_string(origin, value, icalvalue_kind_to_string(kind.rawValue))
+    }
+    
     /// 添加参数
     /// - Parameter parameter: Parameter
     public func add(_ parameter: Parameter) {
