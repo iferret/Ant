@@ -13,27 +13,27 @@ public class Component: NSObject {
     // MARK: 公开属性
     
     /// 组件类别
-    public var kind: Kind { .init(icalcomponent_isa(icalValue)) }
+    public var kind: Kind { .init(icalcomponent_isa(origin)) }
     /// 子组件
     public var components: [Component] {
-        return Component.Kind.allCases.reduce([], { $0 + icalcomponent_get_array_component(from: icalValue, kind: $1.rawValue).map { Component($0) } })
+        return Component.Kind.allCases.reduce([], { $0 + icalcomponent_get_array_component(from: origin, kind: $1.rawValue).map { Component($0) } })
     }
     /// 获取属性列表
     public var properties: [Property] {
-        return Property.Kind.allCases.reduce([], { $0 + icalcomponent_get_array_property(from: icalValue, kind: $1.rawValue).map { Property($0) } })
+        return Property.Kind.allCases.reduce([], { $0 + icalcomponent_get_array_property(from: origin, kind: $1.rawValue).map { Property($0) } })
     }
     
     // MARK: 私有属性
     
     /// icalcomponent
-    internal let icalValue: icalcomponent
+    internal let origin: icalcomponent
     
     // MARK: 生命周期
     
     /// 构建
     /// - Parameter rawValue: icalcomponent
     internal init(_ rawValue: icalcomponent) {
-        self.icalValue = rawValue
+        self.origin = rawValue
     }
     
     /// 构建
@@ -54,11 +54,11 @@ public class Component: NSObject {
     /// 构建
     /// - Parameter other: Component
     public convenience init(other: Component) {
-        self.init(icalcomponent_new_clone(other.icalValue))
+        self.init(icalcomponent_new_clone(other.origin))
     }
     
     /// 析构函数
     deinit {
-        icalcomponent_free(icalValue)
+        icalcomponent_free(origin)
     }
 }

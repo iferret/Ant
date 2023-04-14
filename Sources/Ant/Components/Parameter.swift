@@ -13,19 +13,19 @@ public class Parameter: NSObject {
     // MARK: 公开属性
     
     /// Kind
-    public var kind: Kind { .init(icalparameter_isa(icalValue)) }
+    public var kind: Kind { .init(icalparameter_isa(origin)) }
     
     // MARK: 私有属性
     
     /// icalparameter
-    internal let icalValue: icalparameter
+    internal let origin: icalparameter
     
     // MARK: 生命周期
     
     /// 构建
     /// - Parameter rawValue: icalparameter
     internal init(_ rawValue: icalparameter) {
-        self.icalValue = rawValue
+        self.origin = rawValue
     }
     
     /// 构建
@@ -46,11 +46,11 @@ public class Parameter: NSObject {
     /// 构建
     /// - Parameter other: Parameter
     public convenience init(other: Parameter) {
-        self.init(icalparameter_new_clone(other.icalValue))
+        self.init(icalparameter_new_clone(other.origin))
     }
     
     /// 析构函数
     deinit {
-        icalparameter_free(icalValue)
+        icalparameter_free(origin)
     }
 }

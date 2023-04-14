@@ -14,23 +14,23 @@ public class Value: NSObject {
     // MARK: 公开属性
     
     /// Kind
-    public var kind: Kind { .init(icalvalue_isa(icalValue)) }
+    public var kind: Kind { .init(icalvalue_isa(origin)) }
     
     // MARK: 私有属性
     
     /// icalvalue
-    internal let icalValue: icalvalue
+    internal let origin: icalvalue
     
     // MARK: 生命周期
     
     /// 构建
     /// - Parameter rawValue: icalvalue
     internal init(_ rawValue: icalvalue) {
-        self.icalValue = rawValue
+        self.origin = rawValue
     }
  
     deinit {
-        icalvalue_free(icalValue)
+        icalvalue_free(origin)
     }
 }
 
@@ -47,7 +47,7 @@ extension Value {
     /// 构建
     /// - Parameter other: Value
     public convenience init(other: Value) {
-        self.init(icalvalue_new_clone(other.icalValue))
+        self.init(icalvalue_new_clone(other.origin))
     }
     
     /// 构建
@@ -308,7 +308,7 @@ extension Value {
 //        case .X:
 //        case .XLICCLASS:
 //        case .NO
-        default: return icalvalue_as_ical_string(icalValue)
+        default: return icalvalue_as_ical_string(origin)
         }
     }
 }
