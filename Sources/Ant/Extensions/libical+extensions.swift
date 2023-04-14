@@ -67,4 +67,3 @@ func icalproperty_get_array_parameter(from property: icalproperty, kind: icalpar
     }
     return elements
 }
-

@@ -35,8 +35,9 @@ extension CompatbileWrapper where Base == Date {
 extension icaltimetype: CompatbileValue {}
 extension CompatbileWrapper where Base == icaltimetype {
     
-    /// Date
-    internal var date: Date {
+    /// wrap
+    /// - Returns: Date
+    internal func wrap() -> Date {
         let cmpts: DateComponents = .init(calendar: .autoupdatingCurrent,
                                           timeZone: icaltime_get_timezone(base).hub.timeZone,
                                           year: Int(base.day),

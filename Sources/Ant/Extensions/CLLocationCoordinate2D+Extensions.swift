@@ -21,8 +21,9 @@ extension CompatbileWrapper where Base == CLLocationCoordinate2D {
 extension icalgeotype: CompatbileValue {}
 extension CompatbileWrapper where Base == icalgeotype {
     
-    /// CLLocationCoordinate2D
-    internal var coordinate2D: CLLocationCoordinate2D {
+    /// wrap
+    /// - Returns: wrap
+    internal func wrap() -> CLLocationCoordinate2D {
         return .init(latitude: base.lat, longitude: base.lon)
     }
 }

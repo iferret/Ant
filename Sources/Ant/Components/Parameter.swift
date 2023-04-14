@@ -12,8 +12,8 @@ public class Parameter: NSObject {
     
     // MARK: 公开属性
     
-    /// Kind
-    public var kind: Kind { .init(icalparameter_isa(origin)) }
+    /// Wrap<icalparameter_kind>
+    public var kind: Wrap<icalparameter_kind> { icalparameter_isa(origin).hub.wrap() }
     
     // MARK: 私有属性
     
@@ -29,8 +29,8 @@ public class Parameter: NSObject {
     }
     
     /// 构建
-    /// - Parameter kind: Kind
-    public convenience init(kind: Kind) {
+    /// - Parameter kind: Wrap<icalparameter_kind>
+    public convenience init(kind: Wrap<icalparameter_kind>) {
         self.init(icalparameter_new(kind.rawValue))
     }
     

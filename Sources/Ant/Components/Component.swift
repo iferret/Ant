@@ -12,15 +12,15 @@ public class Component: NSObject {
     
     // MARK: 公开属性
     
-    /// 组件类别
-    public var kind: Kind { .init(icalcomponent_isa(origin)) }
+    /// Wrap<icalcomponent_kind>
+    public var kind: Wrap<icalcomponent_kind> { icalcomponent_isa(origin).hub.wrap() }
     /// 子组件
     public var components: [Component] {
-        return Component.Kind.allCases.reduce([], { $0 + icalcomponent_get_array_component(from: origin, kind: $1.rawValue).map { Component($0) } })
+        return Wrap<icalcomponent_kind>.allCases.reduce([], { $0 + icalcomponent_get_array_component(from: origin, kind: $1.rawValue).map { Component($0) } })
     }
     /// 获取属性列表
     public var properties: [Property] {
-        return Property.Kind.allCases.reduce([], { $0 + icalcomponent_get_array_property(from: origin, kind: $1.rawValue).map { Property($0) } })
+        return Wrap<icalproperty_kind>.allCases.reduce([], { $0 + icalcomponent_get_array_property(from: origin, kind: $1.rawValue).map { Property($0) } })
     }
     
     // MARK: 私有属性
@@ -37,8 +37,8 @@ public class Component: NSObject {
     }
     
     /// 构建
-    /// - Parameter kind: Kind
-    public convenience init(kind: Kind) {
+    /// - Parameter kind: Wrap<icalcomponent_kind>
+    public convenience init(kind: Wrap<icalcomponent_kind>) {
         self.init(icalcomponent_new(kind.rawValue))
     }
     

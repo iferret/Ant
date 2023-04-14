@@ -12,11 +12,11 @@ public class Property: NSObject {
     
     // MARK: 公开属性
     
-    /// 属性类别
-    public var kind: Kind { .init(icalproperty_isa(origin)) }
+    /// Wrap<icalproperty_kind>
+    public var kind: Wrap<icalproperty_kind> { icalproperty_isa(origin).hub.wrap() }
     /// 参数列表
     public var parameters: [Parameter] {
-        return Parameter.Kind.allCases.reduce([], { $0 + icalproperty_get_array_parameter(from: origin, kind: $1.rawValue).map { Parameter($0) } })
+        return Wrap<icalparameter_kind>.allCases.reduce([], { $0 + icalproperty_get_array_parameter(from: origin, kind: $1.rawValue).map { Parameter($0) } })
     }
     /// Value
     public var value: Value {
@@ -38,8 +38,8 @@ public class Property: NSObject {
     }
     
     /// 构建
-    /// - Parameter kind: Kind
-    public convenience init(kind: Kind) {
+    /// - Parameter kind: Wrap<icalproperty_kind>
+    public convenience init(kind: Wrap<icalproperty_kind>) {
         self.init(icalproperty_new(kind.rawValue))
     }
     
@@ -91,8 +91,8 @@ extension Property {
     }
 
     /// 删除参数
-    /// - Parameter kind: Parameter.Kind
-    public func removeAll(by kind: Parameter.Kind) {
+    /// - Parameter kind: Wrap<icalparameter_kind>
+    public func removeAll(by kind: Wrap<icalparameter_kind>) {
         icalproperty_remove_parameter_by_kind(origin, kind.rawValue)
     }
     
