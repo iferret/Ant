@@ -16,4 +16,10 @@ extension CompatbileWrapper where Base == String {
     internal func likes(_ text: String) -> Bool {
         return NSPredicate(format: "SELF LIKE[cd] %@", text).evaluate(with: base) == true
     }
+    
+    /// toURL
+    /// - Returns: URL
+    internal func toURL() -> URL? {
+        return .init(string: base)
+    }
 }

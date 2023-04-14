@@ -10,6 +10,19 @@ import libical
 import CoreLocation
 
 public class Value: NSObject {
+    public typealias Action = Property.Action
+    public typealias BusyType = Property.BusyType
+    public typealias CarLevel = Property.CarLevel
+    public typealias Class = Property.Class
+    public typealias Command = Property.Command
+    public typealias Method = Property.Method
+    public typealias PollCompletion = Property.PollCompletion
+    public typealias PollMode = Property.PollMode
+    public typealias QueryLevel = Property.QueryLevel
+    public typealias Status = Property.Status
+    public typealias TaskMode = Property.TaskMode
+    public typealias Transp = Property.Transp
+    public typealias xlicClass = Property.xlicClass
     
     // MARK: 公开属性
     
@@ -57,8 +70,8 @@ extension Value {
     }
     
     /// 构建
-    /// - Parameter cmd: Property.Command
-    public convenience init(cmd: Property.Command) {
+    /// - Parameter cmd: Command
+    public convenience init(cmd: Command) {
         self.init(icalvalue_new_cmd(cmd.rawValue))
     }
     
@@ -91,8 +104,8 @@ extension Value {
     }
     
     /// 构建
-    /// - Parameter cls: Property.Class
-    public convenience init(cls: Property.Class) {
+    /// - Parameter cls: Class
+    public convenience init(cls: Class) {
         self.init(icalvalue_new_class(cls.rawValue))
     }
     
@@ -115,8 +128,8 @@ extension Value {
     }
     
     /// 构建
-    /// - Parameter action: Property.Action
-    public convenience init(action: Property.Action) {
+    /// - Parameter action: Action
+    public convenience init(action: Action) {
         self.init(icalvalue_new_action(action.rawValue))
     }
     
@@ -134,8 +147,8 @@ extension Value {
     }
     
     /// 构建
-    /// - Parameter method: Property.Method
-    public convenience init(method: Property.Method) {
+    /// - Parameter method: Method
+    public convenience init(method: Method) {
         self.init(icalvalue_new_method(method.rawValue))
     }
     
@@ -146,8 +159,8 @@ extension Value {
     }
     
     /// 构建
-    /// - Parameter status: Property.Status
-    public convenience init(status: Property.Status) {
+    /// - Parameter status: Status
+    public convenience init(status: Status) {
         self.init(icalvalue_new_status(status.rawValue))
     }
     
@@ -158,8 +171,8 @@ extension Value {
     }
     
     /// 构建
-    /// - Parameter transp: Property.Transp
-    public convenience init(transp: Property.Transp) {
+    /// - Parameter transp: Transp
+    public convenience init(transp: Transp) {
         self.init(icalvalue_new_transp(transp.rawValue))
     }
     
@@ -182,14 +195,14 @@ extension Value {
     }
     
     /// 构建
-    /// - Parameter busyType: Property.BusyType
-    public convenience init(busyType: Property.BusyType) {
+    /// - Parameter busyType: BusyType
+    public convenience init(busyType: BusyType) {
         self.init(icalvalue_new_busytype(busyType.rawValue))
     }
     
     /// 构建
-    /// - Parameter carlevel: Property.CarLevel
-    public convenience init(carlevel: Property.CarLevel) {
+    /// - Parameter carlevel: CarLevel
+    public convenience init(carlevel: CarLevel) {
         self.init(icalvalue_new_carlevel(carlevel.rawValue))
     }
     
@@ -206,14 +219,14 @@ extension Value {
     }
     
     /// 构建
-    /// - Parameter pollMode: Property.PollMode
-    public convenience init(pollMode: Property.PollMode) {
+    /// - Parameter pollMode: PollMode
+    public convenience init(pollMode: PollMode) {
         self.init(icalvalue_new_pollmode(pollMode.rawValue))
     }
     
     /// 构建
-    /// - Parameter taskMode: Property.TaskMode
-    public convenience init(taskMode: Property.TaskMode) {
+    /// - Parameter taskMode: TaskMode
+    public convenience init(taskMode: TaskMode) {
         self.init(icalvalue_new_taskmode(taskMode.rawValue))
     }
     
@@ -224,8 +237,8 @@ extension Value {
     }
     
     /// 构建
-    /// - Parameter xlicClass: Property.xlicClass
-    public convenience init(xlicClass: Property.xlicClass) {
+    /// - Parameter xlicClass: xlicClass
+    public convenience init(xlicClass: xlicClass) {
         self.init(icalvalue_new_xlicclass(xlicClass.rawValue))
     }
     
@@ -236,15 +249,15 @@ extension Value {
     }
     
     /// 构建
-    /// - Parameter queryLevel: Property.QueryLevel
-    public convenience init(queryLevel: Property.QueryLevel) {
+    /// - Parameter queryLevel: QueryLevel
+    public convenience init(queryLevel: QueryLevel) {
         self.init(icalvalue_new_querylevel(queryLevel.rawValue))
     }
     
     /// 构建
     /// - Parameter dateTime: Date
-    public convenience init(dateTime: Date) {
-        self.init(icalvalue_new_datetimedate(dateTime.hub.icaltimetype))
+    public convenience init(datetimedate: Date) {
+        self.init(icalvalue_new_datetimedate(datetimedate.hub.icaltimetype))
     }
     
     /// 构建
@@ -260,55 +273,55 @@ extension Value {
     }
     
     /// 构建
-    /// - Parameter pollCompletion: Property.PollCompletion
-    public convenience init(pollCompletion: Property.PollCompletion) {
+    /// - Parameter pollCompletion: PollCompletion
+    public convenience init(pollCompletion: PollCompletion) {
         self.init(icalvalue_new_pollcompletion(pollCompletion.rawValue))
     }
 }
 
 extension Value {
-    
+
     /// Any
-    internal var rawValue: Any {
+    public var rawValue: Any? {
         switch kind {
-//        case .ANY:
-//        case .ACTION:
-//        case .ATTACH:
-//        case .BINARY:
-//        case .BOOLEAN:
-//        case .BUSYTYPE:
-//        case .CALADDRESS:
-//        case .CARLEVEL:
-//        case .CLASS:
-//        case .CMD:
-//        case .DATE:
-//        case .DATETIME:
-//        case .DATETIMEDATE:
-//        case .DATETIMEPERIOD:
-//        case .DURATION:
-//        case .FLOAT:
-//        case .GEO:
-//        case .INTEGER:
-//        case .METHOD:
-//        case .PERIOD:
-//        case .POLLCOMPLETION:
-//        case .POLLMODE:
-//        case .QUERY:
-//        case .QUERYLEVEL:
-//        case .RECUR:
-//        case .REQUESTSTATUS:
-//        case .STATUS:
-//        case .STRING:
-//        case .TASKMODE:
-//        case .TEXT:
-//        case .TRANSP:
-//        case .TRIGGER:
-//        case .URI:
-//        case .UTCOFFSET:
-//        case .X:
-//        case .XLICCLASS:
-//        case .NO
-        default: return icalvalue_as_ical_string(origin)
+        case .ANY:              return icalvalue_get_string(origin).hub.wrap()
+        case .ACTION:           return Action(icalvalue_get_action(origin))
+        case .ATTACH:           return icalattach_get_url(icalvalue_get_attach(origin)).hub.wrap()
+        case .BINARY:           return icalvalue_get_binary(origin).hub.wrap()
+        case .BOOLEAN:          return icalvalue_get_boolean(origin) > 0
+        case .BUSYTYPE:         return BusyType(icalvalue_get_busytype(origin))
+        case .CALADDRESS:       return icalvalue_get_caladdress(origin).hub.wrap()
+        case .CARLEVEL:         return CarLevel(icalvalue_get_carlevel(origin))
+        case .CLASS:            return Class(icalvalue_get_class(origin))
+        case .CMD:              return Command(icalvalue_get_cmd(origin))
+        case .DATE:             return icalvalue_get_date(origin).hub.date
+        case .DATETIME:         return icalvalue_get_datetime(origin).hub.date
+        case .DATETIMEDATE:     return icalvalue_get_datetimedate(origin).hub.date
+        case .DATETIMEPERIOD:   return icalvalue_get_datetimeperiod(origin)
+        case .DURATION:         return icalvalue_get_duration(origin)
+        case .FLOAT:            return icalvalue_get_float(origin)
+        case .GEO:              return icalvalue_get_geo(origin).hub.coordinate2D
+        case .INTEGER:          return icalvalue_get_integer(origin)
+        case .METHOD:           return Method(icalvalue_get_method(origin))
+        case .PERIOD:           return icalvalue_get_period(origin)
+        case .POLLCOMPLETION:   return PollCompletion(icalvalue_get_pollcompletion(origin))
+        case .POLLMODE:         return PollMode(icalvalue_get_pollmode(origin))
+        case .QUERY:            return icalvalue_get_query(origin).hub.wrap()
+        case .QUERYLEVEL:       return QueryLevel(icalvalue_get_querylevel(origin))
+        case .RECUR:            return icalvalue_get_recur(origin)
+        case .REQUESTSTATUS:    return icalvalue_get_requeststatus(origin)
+        case .STATUS:           return Status(icalvalue_get_status(origin))
+        case .STRING:           return icalvalue_get_string(origin).hub.wrap()
+        case .TASKMODE:         return TaskMode(icalvalue_get_taskmode(origin))
+        case .TEXT:             return icalvalue_get_text(origin).hub.wrap()
+        case .TRANSP:           return Transp(icalvalue_get_transp(origin))
+        case .TRIGGER:          return icalvalue_get_trigger(origin)
+        case .URI:              return icalvalue_get_uri(origin).hub.wrap().hub.toURL()
+        case .UTCOFFSET:        return icalvalue_get_utcoffset(origin)
+        case .X:                return icalvalue_get_x(origin).hub.wrap()
+        case .XLICCLASS:        return xlicClass(icalvalue_get_xlicclass(origin))
+        case .NO:               return nil
+        default:                return icalvalue_as_ical_string(origin)
         }
     }
 }

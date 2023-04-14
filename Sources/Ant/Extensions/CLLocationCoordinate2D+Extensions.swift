@@ -17,3 +17,12 @@ extension CompatbileWrapper where Base == CLLocationCoordinate2D {
         return .init(lat: base.latitude, lon: base.longitude)
     }
 }
+
+extension icalgeotype: CompatbileValue {}
+extension CompatbileWrapper where Base == icalgeotype {
+    
+    /// CLLocationCoordinate2D
+    internal var coordinate2D: CLLocationCoordinate2D {
+        return .init(latitude: base.lat, longitude: base.lon)
+    }
+}

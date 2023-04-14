@@ -37,5 +37,3 @@ extension CompatbileValue {
     }
 }
 
-extension UnsafeMutablePointer: CompatbileValue {}
-extension UnsafePointer: CompatbileValue {}
