@@ -28,7 +28,7 @@ public class Value: NSObject {
     internal init(_ rawValue: icalvalue) {
         self.origin = rawValue
     }
- 
+    
     deinit {
         icalvalue_free(origin)
     }
@@ -36,248 +36,230 @@ public class Value: NSObject {
 
 extension Value {
     
-    /// 构建
-    /// - Parameters:
-    ///   - kind: Kind
-    ///   - value: String
-    public convenience init(kind: Wrap<icalvalue_kind>, value: String) {
-        self.init(icalvalue_new_from_string(kind.rawValue, value))
+    /// icalvalue_new_action
+    /// - Parameter wrap: Wrap<icalproperty_action>
+    public convenience init(action wrap: Wrap<icalproperty_action>) {
+        self.init(icalvalue_new_action(wrap.rawValue))
     }
     
-    /// 构建
-    /// - Parameter other: Value
-    public convenience init(other: Value) {
-        self.init(icalvalue_new_clone(other.origin))
+    /// icalvalue_new_attach
+    /// - Parameter value: Attachment
+    public convenience init(attach value: Attachment) {
+        self.init(icalvalue_new_attach(value.origin))
     }
     
-    /// 构建
-    /// - Parameter string: String
-    public convenience init(x: String) {
-        self.init(icalvalue_new_x(x))
+    /// icalvalue_new_binary
+    /// - Parameter value: String
+    public convenience init(binary value: String) {
+        self.init(icalvalue_new_binary(value))
     }
     
-    /// 构建
-    /// - Parameter cmd: Wrap<icalproperty_cmd>
-    public convenience init(cmd: Wrap<icalproperty_cmd>) {
-        self.init(icalvalue_new_cmd(cmd.rawValue))
+    /// icalvalue_new_boolean
+    /// - Parameter value: Bool
+    public convenience init(boolean value: Bool) {
+        self.init(icalvalue_new_boolean(value == true ? 1 : 0))
     }
     
-    /// 构建
-    /// - Parameter geo: CLLocationCoordinate2D
-    internal convenience init(geo: CLLocationCoordinate2D) {
-        self.init(icalvalue_new_geo(geo.hub.icalgeotype))
+    /// icalvalue_new_busytype
+    /// - Parameter wrap: Wrap<icalproperty_busytype>
+    public convenience init(busyType wrap: Wrap<icalproperty_busytype>) {
+        self.init(icalvalue_new_busytype(wrap.rawValue))
     }
     
-    /// 构建
-    /// - Parameter URI: URL
-    public convenience init(URI: URL) {
-        if let uri = URI.absoluteString.removingPercentEncoding {
-            self.init(icalvalue_new_uri(uri))
-        } else {
-            self.init(icalvalue_new_uri(URI.absoluteString))
-        }
+    /// icalvalue_new_caladdress
+    /// - Parameter value: String
+    public convenience init(caladdress value: String) {
+        self.init(icalvalue_new_caladdress(value))
     }
     
-    /// 构建
-    /// - Parameter date: Date
-    public convenience init(date: Date) {
-        self.init(icalvalue_new_date(date.hub.icaltimetype))
+    /// icalvalue_new_carlevel
+    /// - Parameter wrap: Wrap<icalproperty_carlevel>
+    public convenience init(carlevel wrap: Wrap<icalproperty_carlevel>) {
+        self.init(icalvalue_new_carlevel(wrap.rawValue))
     }
     
-    /// 构建
-    /// - Parameter text: String
-    public convenience init(text: String) {
-        self.init(icalvalue_new_text(text))
+    /// icalvalue_new_class
+    /// - Parameter wrap: Wrap<icalproperty_class>
+    public convenience init(class wrap: Wrap<icalproperty_class>) {
+        self.init(icalvalue_new_class(wrap.rawValue))
     }
     
-    /// 构建
-    /// - Parameter cls: Wrap<icalproperty_class>
-    public convenience init(cls: Wrap<icalproperty_class>) {
-        self.init(icalvalue_new_class(cls.rawValue))
+    /// icalvalue_new_cmd
+    /// - Parameter wrap: Wrap<icalproperty_cmd>
+    public convenience init(cmd wrap: Wrap<icalproperty_cmd>) {
+        self.init(icalvalue_new_cmd(wrap.rawValue))
     }
     
-    /// 构建
-    /// - Parameter float: Float
-    public convenience init(float: Float) {
-        self.init(icalvalue_new_float(float))
+    /// icalvalue_new_date
+    /// - Parameter value: Date
+    public convenience init(date value: Date) {
+        self.init(icalvalue_new_date(value.hub.icaltimetype))
     }
     
-    /// 构建
-    /// - Parameter query: String
-    public convenience init(query: String) {
-        self.init(icalvalue_new_query(query))
+    /// icalvalue_new_datetime
+    /// - Parameter value: Date
+    public convenience init(datetime value: Date) {
+        self.init(icalvalue_new_datetime(value.hub.icaltimetype))
     }
     
-    /// 构建
-    /// - Parameter recur: icalrecurrencetype
-    public convenience init(recur: icalrecurrencetype) {
-        self.init(icalvalue_new_recur(recur))
+    /// icalvalue_new_datetimedate
+    /// - Parameter value: Date
+    public convenience init(datetimedate value: Date) {
+        self.init(icalvalue_new_datetimedate(value.hub.icaltimetype))
     }
     
-    /// 构建
-    /// - Parameter action: Wrap<icalproperty_action>
-    public convenience init(action: Wrap<icalproperty_action>) {
-        self.init(icalvalue_new_action(action.rawValue))
+    /// icalvalue_new_datetimeperiod
+    /// - Parameter value: icaldatetimeperiodtype
+    public convenience init(datetimeperiod value: icaldatetimeperiodtype) {
+        self.init(icalvalue_new_datetimeperiod(value))
     }
     
-    /// 构建
-    /// - Parameter fileURL: URL
-    public convenience init(attachment fileURL: URL) {
-        let attach = icalattach_new_from_url(fileURL.hub.path)
-        self.init(icalvalue_new_attach(attach))
+    /// icalvalue_new_duration
+    /// - Parameter value: icaldurationtype
+    public convenience init(duration value: icaldurationtype) {
+        self.init(icalvalue_new_duration(value))
     }
     
-    /// 构建
-    /// - Parameter binary: UnsafePointer<CChar>
-    public convenience init(binary: UnsafePointer<CChar>) {
-        self.init(icalvalue_new_binary(binary))
+    /// icalvalue_new_float
+    /// - Parameter value: Float
+    public convenience init(float value: Float) {
+        self.init(icalvalue_new_float(value))
     }
     
-    /// 构建
-    /// - Parameter method: Wrap<icalproperty_method>
-    public convenience init(method: Wrap<icalproperty_method>) {
-        self.init(icalvalue_new_method(method.rawValue))
+    /// icalvalue_new_geo
+    /// - Parameter value: CLLocationCoordinate2D
+    public convenience init(geo value: CLLocationCoordinate2D) {
+        self.init(icalvalue_new_geo(value.hub.icalgeotype))
     }
     
-    /// 构建
-    /// - Parameter period: icalperiodtype
-    public convenience init(period: icalperiodtype) {
-        self.init(icalvalue_new_period(period))
+    /// icalvalue_new_integer
+    /// - Parameter value: Int32
+    public convenience init(integer value: Int32) {
+        self.init(icalvalue_new_integer(value))
     }
     
-    /// 构建
-    /// - Parameter status: Wrap<icalproperty_status>
-    public convenience init(status: Wrap<icalproperty_status>) {
-        self.init(icalvalue_new_status(status.rawValue))
+    /// icalvalue_new_method
+    /// - Parameter wrap: Wrap<icalproperty_method>
+    public convenience init(method wrap: Wrap<icalproperty_method>) {
+        self.init(icalvalue_new_method(wrap.rawValue))
     }
     
-    /// 构建
-    /// - Parameter string: String
-    public convenience init(string: String) {
-        self.init(icalvalue_new_string(string))
+    /// icalvalue_new_period
+    /// - Parameter value: icalperiodtype
+    public convenience init(period value: icalperiodtype) {
+        self.init(icalvalue_new_period(value))
     }
     
-    /// 构建
-    /// - Parameter transp: Wrap<icalproperty_transp>
-    public convenience init(transp: Wrap<icalproperty_transp>) {
-        self.init(icalvalue_new_transp(transp.rawValue))
+    /// icalvalue_new_pollcompletion
+    /// - Parameter wrap: Wrap<icalproperty_pollcompletion>
+    public convenience init(pollcompletion wrap: Wrap<icalproperty_pollcompletion>) {
+        self.init(icalvalue_new_pollcompletion(wrap.rawValue))
     }
     
-    /// 构建
-    /// - Parameter boolean: Bool
-    public convenience init(boolean: Bool) {
-        self.init(icalvalue_new_boolean(boolean == true ? 1 : 0))
+    /// icalvalue_new_pollmode
+    /// - Parameter wrap: Wrap<icalproperty_pollmode>
+    public convenience init(pollmode wrap: Wrap<icalproperty_pollmode>) {
+        self.init(icalvalue_new_pollmode(wrap.rawValue))
     }
     
-    /// 构建
-    /// - Parameter integer: Int32
-    public convenience init(integer: Int32) {
-        self.init(icalvalue_new_integer(integer))
+    /// icalvalue_new_query
+    /// - Parameter value: String
+    public convenience init(query value: String) {
+        self.init(icalvalue_new_query(value))
     }
     
-    /// 构建
-    /// - Parameter integer: icaltriggertype
-    public convenience init(trigger: icaltriggertype) {
-        self.init(icalvalue_new_trigger(trigger))
+    /// icalvalue_new_querylevel
+    /// - Parameter wrap: Wrap<icalproperty_querylevel>
+    public convenience init(querylevel wrap: Wrap<icalproperty_querylevel>) {
+        self.init(icalvalue_new_querylevel(wrap.rawValue))
     }
     
-    /// 构建
-    /// - Parameter busyType: Wrap<icalproperty_busytype>
-    public convenience init(busyType: Wrap<icalproperty_busytype>) {
-        self.init(icalvalue_new_busytype(busyType.rawValue))
+    /// icalvalue_new_recur
+    /// - Parameter value: icalrecurrencetype
+    public convenience init(recur value: icalrecurrencetype) {
+        self.init(icalvalue_new_recur(value))
     }
     
-    /// 构建
-    /// - Parameter carlevel: Wrap<icalproperty_carlevel>
-    public convenience init(carlevel: Wrap<icalproperty_carlevel>) {
-        self.init(icalvalue_new_carlevel(carlevel.rawValue))
+    /// icalvalue_new_requeststatus
+    /// - Parameter value: icalreqstattype
+    public convenience init(requeststatus value: icalreqstattype) {
+        self.init(icalvalue_new_requeststatus(value))
     }
     
-    /// 构建
-    /// - Parameter datetime: Date
-    public convenience init(datetime: Date) {
-        self.init(icalvalue_new_datetime(datetime.hub.icaltimetype))
+    /// icalvalue_new_status
+    /// - Parameter wrap: Wrap<icalproperty_status>
+    public convenience init(status wrap: Wrap<icalproperty_status>) {
+        self.init(icalvalue_new_status(wrap.rawValue))
     }
     
-    /// 构建
-    /// - Parameter duration: Int32
-    public convenience init(duration seconds: Int32) {
-        self.init(icalvalue_new_duration(icaldurationtype_from_int(seconds)))
+    /// icalvalue_new_string
+    /// - Parameter value: String
+    public convenience init(string value: String) {
+        self.init(icalvalue_new_string(value))
     }
     
-    /// 构建
-    /// - Parameter pollMode: Wrap<icalproperty_pollmode>
-    public convenience init(pollMode: Wrap<icalproperty_pollmode>) {
-        self.init(icalvalue_new_pollmode(pollMode.rawValue))
+    /// icalvalue_new_taskmode
+    /// - Parameter wrap: Wrap<icalproperty_taskmode>
+    public convenience init(taskmode wrap: Wrap<icalproperty_taskmode>) {
+        self.init(icalvalue_new_taskmode(wrap.rawValue))
     }
     
-    /// 构建
-    /// - Parameter taskMode: Wrap<icalproperty_taskmode>
-    public convenience init(taskMode: Wrap<icalproperty_taskmode>) {
-        self.init(icalvalue_new_taskmode(taskMode.rawValue))
+    /// icalvalue_new_text
+    /// - Parameter value: String
+    public convenience init(text value: String) {
+        self.init(icalvalue_new_text(value))
     }
     
-    /// 构建
-    /// - Parameter utcOffset: Int32
-    public convenience init(utcOffset: Int32) {
-        self.init(icalvalue_new_utcoffset(utcOffset))
+    /// icalvalue_new_transp
+    /// - Parameter wrap: Wrap<icalproperty_transp>
+    public convenience init(transp wrap: Wrap<icalproperty_transp>) {
+        self.init(icalvalue_new_transp(wrap.rawValue))
     }
     
-    /// 构建
-    /// - Parameter xlicClass: Wrap<icalproperty_xlicclass>
-    public convenience init(xlicClass: Wrap<icalproperty_xlicclass>) {
-        self.init(icalvalue_new_xlicclass(xlicClass.rawValue))
+    /// icalvalue_new_trigger
+    /// - Parameter value: icaltriggertype
+    public convenience init(trigger value: icaltriggertype) {
+        self.init(icalvalue_new_trigger(value))
     }
     
-    /// 构建
-    /// - Parameter calAddress: String
-    public convenience init(calAddress: String) {
-        self.init(icalvalue_new_caladdress(calAddress))
+    /// icalvalue_new_uri
+    /// - Parameter value: URL
+    public convenience init(uri value: URL) {
+        self.init(icalvalue_new_uri(value.absoluteString))
     }
     
-    /// 构建
-    /// - Parameter querylevel: Wrap<icalproperty_querylevel>
-    public convenience init(querylevel: Wrap<icalproperty_querylevel>) {
-        self.init(icalvalue_new_querylevel(querylevel.rawValue))
+    /// icalvalue_new_utcoffset
+    /// - Parameter value: Int32
+    public convenience init(utcoffset value: Int32) {
+        self.init(icalvalue_new_utcoffset(value))
     }
     
-    /// 构建
-    /// - Parameter dateTime: Date
-    public convenience init(datetimedate: Date) {
-        self.init(icalvalue_new_datetimedate(datetimedate.hub.icaltimetype))
+    /// icalvalue_new_x
+    /// - Parameter value: String
+    public convenience init(x value: String) {
+        self.init(icalvalue_new_x(value))
     }
     
-    /// 构建
-    /// - Parameter requestStatus: icalreqstattype
-    public convenience init(requestStatus: icalreqstattype) {
-        self.init(icalvalue_new_requeststatus(requestStatus))
+    /// icalvalue_new_xlicclass
+    /// - Parameter wrap: Wrap<icalproperty_xlicclass>
+    public convenience init(xlicclass wrap: Wrap<icalproperty_xlicclass>) {
+        self.init(icalvalue_new_xlicclass(wrap.rawValue))
     }
     
-    /// 构建
-    /// - Parameter datetimePeriod: icaldatetimeperiodtype
-    public convenience init(datetimePeriod: icaldatetimeperiodtype) {
-        self.init(icalvalue_new_datetimeperiod(datetimePeriod))
-    }
-    
-    /// 构建
-    /// - Parameter pollCompletion: Wrap<icalproperty_pollcompletion>
-    public convenience init(pollCompletion: Wrap<icalproperty_pollcompletion>) {
-        self.init(icalvalue_new_pollcompletion(pollCompletion.rawValue))
-    }
 }
 
 extension Value {
-
-    /// Any
+    
+    /// Any?
     public var rawValue: Any? {
         switch kind {
-        case .ANY:              return icalvalue_get_string(origin).hub.wrap()
+        case .ANY:              return icalvalue_get_string(origin)?.hub.wrap()
         case .ACTION:           return icalvalue_get_action(origin).hub.wrap()
-        case .ATTACH:           return icalattach_get_url(icalvalue_get_attach(origin)).hub.wrap()
-        case .BINARY:           return icalvalue_get_binary(origin).hub.wrap()
+        case .ATTACH:           return Attachment.init(icalvalue_get_attach(origin))
+        case .BINARY:           return icalvalue_get_binary(origin)?.hub.wrap()
         case .BOOLEAN:          return icalvalue_get_boolean(origin) > 0
         case .BUSYTYPE:         return icalvalue_get_busytype(origin).hub.wrap()
-        case .CALADDRESS:       return icalvalue_get_caladdress(origin).hub.wrap()
+        case .CALADDRESS:       return icalvalue_get_caladdress(origin)?.hub.wrap()
         case .CARLEVEL:         return icalvalue_get_carlevel(origin).hub.wrap()
         case .CLASS:            return icalvalue_get_class(origin).hub.wrap()
         case .CMD:              return icalvalue_get_cmd(origin).hub.wrap()
@@ -293,28 +275,21 @@ extension Value {
         case .PERIOD:           return icalvalue_get_period(origin)
         case .POLLCOMPLETION:   return icalvalue_get_pollcompletion(origin).hub.wrap()
         case .POLLMODE:         return icalvalue_get_pollmode(origin).hub.wrap()
-        case .QUERY:            return icalvalue_get_query(origin).hub.wrap()
+        case .QUERY:            return icalvalue_get_query(origin)?.hub.wrap()
         case .QUERYLEVEL:       return icalvalue_get_querylevel(origin).hub.wrap()
         case .RECUR:            return icalvalue_get_recur(origin)
         case .REQUESTSTATUS:    return icalvalue_get_requeststatus(origin)
         case .STATUS:           return icalvalue_get_status(origin).hub.wrap()
-        case .STRING:           return icalvalue_get_string(origin).hub.wrap()
+        case .STRING:           return icalvalue_get_string(origin)?.hub.wrap()
         case .TASKMODE:         return icalvalue_get_taskmode(origin).hub.wrap()
-        case .TEXT:             return icalvalue_get_text(origin).hub.wrap()
+        case .TEXT:             return icalvalue_get_text(origin)?.hub.wrap()
         case .TRANSP:           return icalvalue_get_transp(origin).hub.wrap()
         case .TRIGGER:          return icalvalue_get_trigger(origin)
-        case .URI:              return icalvalue_get_uri(origin).hub.wrap().hub.toURL()
+        case .URI:              return icalvalue_get_uri(origin)?.hub.wrap().hub.toURL()
         case .UTCOFFSET:        return icalvalue_get_utcoffset(origin)
-        case .X:                return icalvalue_get_x(origin).hub.wrap()
+        case .X:                return icalvalue_get_x(origin)?.hub.wrap()
         case .XLICCLASS:        return icalvalue_get_xlicclass(origin).hub.wrap()
-        case .NO:               return nil
-        default:                return icalvalue_as_ical_string(origin).hub.wrap()
+        default:                return nil
         }
-    }
-    
-    /// fetchAny
-    /// - Returns:  T?
-    public func fetchAny<T>() -> T? {
-        return rawValue as? T
     }
 }

@@ -27,8 +27,12 @@ public class Attachment: NSObject {
     
     /// 构建
     /// - Parameter rawValue: icalattach
-    internal init(_ rawValue: icalattach) {
-        self.origin = rawValue
+    internal init?(_ rawValue: icalattach?) {
+        if let rawValue = rawValue {
+            self.origin = rawValue
+        } else {
+            return nil
+        }
     }
     
     deinit {
@@ -42,6 +46,6 @@ extension Attachment {
     /// 构建
     /// - Parameter url: URL
     public convenience init(fileURL url: URL) {
-        self.init(icalattach_new_from_url(url.absoluteString))
+        self.init(icalattach_new_from_url(url.absoluteString))!
     }
 }
