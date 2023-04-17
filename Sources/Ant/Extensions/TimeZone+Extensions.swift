@@ -8,16 +8,16 @@
 import UIKit
 import libical
 
-extension TimeZone {
+extension Foundation.TimeZone {
     
     /// TimeZone
-    internal static var UTC: TimeZone {
+    internal static var UTC: Foundation.TimeZone {
         return .init(secondsFromGMT: 0)!
     }
 }
 
-extension TimeZone: CompatbileValue {}
-extension CompatbileWrapper where Base == TimeZone {
+extension Foundation.TimeZone: CompatbileValue {}
+extension CompatbileWrapper where Base == Foundation.TimeZone {
     
     /// Bool
     internal var isUTC: Bool {
@@ -39,7 +39,7 @@ extension CompatbileWrapper where Base == TimeZone {
 extension CompatbileWrapper where Base == UnsafePointer<icaltimezone> {
     
     /// TimeZone
-    internal var timeZone: TimeZone {
+    internal var timeZone: Foundation.TimeZone {
         if let tzid = icaltimezone_get_tzid(.init(mutating: .init(base))) {
             return .init(identifier: .init(cString: tzid)) ?? .UTC
         } else {

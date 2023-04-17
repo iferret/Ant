@@ -62,7 +62,3 @@ public class Component: NSObject {
         icalcomponent_free(origin)
     }
 }
-
-extension Component {
-    #warning("新的一周从这里开始")
-}

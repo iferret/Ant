@@ -16,7 +16,8 @@ typealias icalproperty = OpaquePointer
 typealias icalparameter = OpaquePointer
 /// OpaquePointer
 typealias icalvalue = OpaquePointer
-
+/// OpaquePointer
+typealias icalattach = OpaquePointer
 
 // MARK: - Functions
 

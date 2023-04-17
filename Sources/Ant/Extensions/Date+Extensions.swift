@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Foundation
 import libical
 
 extension Date: CompatbileValue {}
@@ -13,7 +14,7 @@ extension CompatbileWrapper where Base == Date {
     
     /// icaltimetype
     internal var icaltimetype: icaltimetype {
-        let cmpts: DateComponents = Calendar.autoupdatingCurrent.dateComponents([.year, .month, .day, .hour, .minute, .second, .timeZone], from: base)
+        let cmpts: DateComponents = Foundation.Calendar.autoupdatingCurrent.dateComponents([.year, .month, .day, .hour, .minute, .second, .timeZone], from: base)
         var zone: UnsafeMutablePointer<icaltimezone>? = nil
         if cmpts.timeZone?.hub.isUTC == true {
             zone = icaltimezone_get_utc_timezone()
