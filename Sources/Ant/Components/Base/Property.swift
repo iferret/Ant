@@ -67,13 +67,13 @@ public class Property: NSObject {
 
 extension Property {
     
-    /// 设置 value
+    /// icalproperty_set_value
     /// - Parameter value: Value
     public func setValue(_ value: Value) {
         icalproperty_set_value(origin, value.origin)
     }
     
-    /// setValue
+    /// icalproperty_set_value_from_string
     /// - Parameters:
     ///   - value: String
     ///   - kind: Wrap<icalvalue_kind>
@@ -81,31 +81,25 @@ extension Property {
         icalproperty_set_value_from_string(origin, value, icalvalue_kind_to_string(kind.rawValue))
     }
     
-    /// 添加参数
+    /// icalproperty_add_parameter
     /// - Parameter parameter: Parameter
     public func add(_ parameter: Parameter) {
         icalproperty_add_parameter(origin, parameter.origin)
     }
     
-    /// 批量添加参数
-    /// - Parameter parameters: [Parameter]
-    public func add(_ parameters: [Parameter]) {
-        parameters.forEach { add($0) }
-    }
-    
-    /// 设置参数
+    /// icalproperty_set_parameter
     /// - Parameter parameter: Parameter
     public func set(_ parameter: Parameter) {
         icalproperty_set_parameter(origin, parameter.origin)
     }
     
-    /// 删除参数
+    /// icalproperty_remove_parameter_by_kind
     /// - Parameter kind: Wrap<icalparameter_kind>
     public func removeAll(by kind: Wrap<icalparameter_kind>) {
         icalproperty_remove_parameter_by_kind(origin, kind.rawValue)
     }
     
-    /// 删除参数
+    /// icalproperty_remove_parameter_by_name
     /// - Parameter name: String
     public func removeAll(by name: String) {
         icalproperty_remove_parameter_by_name(origin, name)
