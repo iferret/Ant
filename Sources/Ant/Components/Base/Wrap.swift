@@ -19,6 +19,13 @@ public struct Wrap<T>: Hashable where T: RawRepresentable<UInt32> {
     }
     
     /// 构建
+    /// - Parameter value: UInt32
+    public init?(uInt32 value: UInt32) {
+        guard let rawValue: T = .init(rawValue: value) else { return nil }
+        self.init(rawValue)
+    }
+    
+    /// 构建
     /// - Parameter hasher: Hasher
     public func hash(into hasher: inout Hasher) {
         hasher.combine(rawValue.rawValue)
