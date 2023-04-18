@@ -9,7 +9,7 @@ import UIKit
 import libical
 import CoreLocation
 
-public class Property: NSObject {
+public class Property: CustomStringConvertible {
     
     // MARK: 公开属性
     
@@ -74,7 +74,7 @@ extension Property {
     }
     
     /// String
-    public override var description: String {
+    public var description: String {
         return icalFormat()
     }
     

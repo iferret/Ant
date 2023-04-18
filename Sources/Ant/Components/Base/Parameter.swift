@@ -8,7 +8,7 @@
 import UIKit
 import libical
 
-public class Parameter: NSObject {
+public class Parameter: CustomStringConvertible {
     
     // MARK: 公开属性
     
@@ -64,7 +64,7 @@ extension Parameter {
     }
     
     /// String
-    public override var description: String {
+    public var description: String {
         return icalFormat()
     }
 }

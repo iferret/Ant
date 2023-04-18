@@ -8,7 +8,7 @@
 import UIKit
 import libical
 
-public class Component: NSObject {
+public class Component: CustomStringConvertible {
     
     // MARK: 公开属性
     
@@ -57,6 +57,7 @@ public class Component: NSObject {
     deinit {
         icalcomponent_free(origin)
     }
+    
 }
 
 extension Component {
@@ -96,9 +97,10 @@ extension Component {
     }
     
     /// String
-    public override var description: String {
+    public var description: String {
         return icalFormat()
     }
+    
 }
 
 extension Component {

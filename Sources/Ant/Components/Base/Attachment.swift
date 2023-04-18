@@ -8,7 +8,7 @@
 import UIKit
 import libical
 
-public class Attachment: NSObject {
+public class Attachment {
     
     // MARK: 公开属性
     
@@ -34,10 +34,7 @@ public class Attachment: NSObject {
             return nil
         }
     }
-    
-    deinit {
-        
-    }
+  
 }
 
 

@@ -9,7 +9,7 @@ import UIKit
 import libical
 import CoreLocation
 
-public class Value: NSObject {
+public class Value {
     
     // MARK: 公开属性
     
