@@ -9,7 +9,7 @@ import UIKit
 import libical
 
 public class Event: Component {
-
+    
     // MARK: 生命周期
     
     /// 构建

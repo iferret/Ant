@@ -85,6 +85,16 @@ extension Component {
         icalcomponent_remove_property(origin, property.origin)
     }
     
+    /// icalFormat
+    /// - Returns: String
+    public func icalFormat() -> String {
+        if let value = icalcomponent_as_ical_string(origin) {
+            return .init(cString: value)
+        } else {
+            return ""
+        }
+    }
+    
 }
 
 extension Component {
