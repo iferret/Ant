@@ -1,14 +1,14 @@
 //
-//  Reply.swift
+//  FreeBusy.swift
 //  
 //
-//  Created by iferret's on 2023/4/18.
+//  Created by iferret's on 2023/4/17.
 //
 
 import UIKit
 import libical
 
-public class Reply: Component {
+public class VFreeBusy: Component {
 
     // MARK: 生命周期
     
@@ -18,7 +18,7 @@ public class Reply: Component {
         guard let rawValue = icalcomponent_new_from_string(value) else {
             throw icalerror.illegal(value)
         }
-        guard icalcomponent_isa(rawValue).hub.wrap() == .VREPLY else {
+        guard icalcomponent_isa(rawValue).hub.wrap() == .VFREEBUSY else {
             throw icalerror.mismatch(value)
         }
         self.init(rawValue)
@@ -26,7 +26,7 @@ public class Reply: Component {
     
     /// 构建
     public convenience init() {
-        self.init(icalcomponent_new(Wrap<icalcomponent_kind>.VREPLY.rawValue))
+        self.init(icalcomponent_new(Wrap<icalcomponent_kind>.VFREEBUSY.rawValue))
     }
     
 }

@@ -1,15 +1,15 @@
 //
-//  Schedule.swift
+//  Alarm.swift
 //  
 //
-//  Created by iferret's on 2023/4/18.
+//  Created by iferret's on 2023/4/17.
 //
 
 import UIKit
 import libical
 
-public class Schedule: Component {
-
+class VAlarm: Component {
+    
     // MARK: 生命周期
     
     /// 构建
@@ -18,7 +18,7 @@ public class Schedule: Component {
         guard let rawValue = icalcomponent_new_from_string(value) else {
             throw icalerror.illegal(value)
         }
-        guard icalcomponent_isa(rawValue).hub.wrap() == .VSCHEDULE else {
+        guard icalcomponent_isa(rawValue).hub.wrap() == .VALARM else {
             throw icalerror.mismatch(value)
         }
         self.init(rawValue)
@@ -26,7 +26,6 @@ public class Schedule: Component {
     
     /// 构建
     public convenience init() {
-        self.init(icalcomponent_new(Wrap<icalcomponent_kind>.VSCHEDULE.rawValue))
+        self.init(icalcomponent_new_valarm())
     }
-    
 }

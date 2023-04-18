@@ -1,5 +1,5 @@
 //
-//  Availability.swift
+//  Todo.swift
 //  
 //
 //  Created by iferret's on 2023/4/17.
@@ -8,7 +8,7 @@
 import UIKit
 import libical
 
-class Availability: Component {
+public class VTodo: Component {
 
     // MARK: 生命周期
     
@@ -18,7 +18,7 @@ class Availability: Component {
         guard let rawValue = icalcomponent_new_from_string(value) else {
             throw icalerror.illegal(value)
         }
-        guard icalcomponent_isa(rawValue).hub.wrap() == .VAVAILABILITY else {
+        guard icalcomponent_isa(rawValue).hub.wrap() == .VTODO else {
             throw icalerror.mismatch(value)
         }
         self.init(rawValue)
@@ -26,7 +26,7 @@ class Availability: Component {
     
     /// 构建
     public convenience init() {
-        self.init(icalcomponent_new_vavailability())
+        self.init(icalcomponent_new(Wrap<icalcomponent_kind>.VTODO.rawValue))
     }
     
 }

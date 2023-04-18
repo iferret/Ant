@@ -1,5 +1,5 @@
 //
-//  Journal.swift
+//  TimeZone.swift
 //  
 //
 //  Created by iferret's on 2023/4/17.
@@ -8,7 +8,7 @@
 import UIKit
 import libical
 
-public class Journal: Component {
+public class VTimeZone: Component {
 
     // MARK: 生命周期
     
@@ -18,7 +18,7 @@ public class Journal: Component {
         guard let rawValue = icalcomponent_new_from_string(value) else {
             throw icalerror.illegal(value)
         }
-        guard icalcomponent_isa(rawValue).hub.wrap() == .VJOURNAL else {
+        guard icalcomponent_isa(rawValue).hub.wrap() == .VTIMEZONE else {
             throw icalerror.mismatch(value)
         }
         self.init(rawValue)
@@ -26,7 +26,7 @@ public class Journal: Component {
     
     /// 构建
     public convenience init() {
-        self.init(icalcomponent_new(Wrap<icalcomponent_kind>.VJOURNAL.rawValue))
+        self.init(icalcomponent_new(Wrap<icalcomponent_kind>.VTIMEZONE.rawValue))
     }
     
 }

@@ -1,5 +1,5 @@
 //
-//  Car.swift
+//  Schedule.swift
 //  
 //
 //  Created by iferret's on 2023/4/18.
@@ -8,10 +8,8 @@
 import UIKit
 import libical
 
-public class Car: Component {
+public class VSchedule: Component {
 
-    
-    
     // MARK: 生命周期
     
     /// 构建
@@ -20,7 +18,7 @@ public class Car: Component {
         guard let rawValue = icalcomponent_new_from_string(value) else {
             throw icalerror.illegal(value)
         }
-        guard icalcomponent_isa(rawValue).hub.wrap() == .VCAR else {
+        guard icalcomponent_isa(rawValue).hub.wrap() == .VSCHEDULE else {
             throw icalerror.mismatch(value)
         }
         self.init(rawValue)
@@ -28,7 +26,7 @@ public class Car: Component {
     
     /// 构建
     public convenience init() {
-        self.init(icalcomponent_new(Wrap<icalcomponent_kind>.VCAR.rawValue))
+        self.init(icalcomponent_new(Wrap<icalcomponent_kind>.VSCHEDULE.rawValue))
     }
     
 }

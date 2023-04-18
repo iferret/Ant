@@ -1,5 +1,5 @@
 //
-//  Alarm.swift
+//  Patch.swift
 //  
 //
 //  Created by iferret's on 2023/4/17.
@@ -8,8 +8,8 @@
 import UIKit
 import libical
 
-class Alarm: Component {
-    
+public class VPatch: Component {
+
     // MARK: 生命周期
     
     /// 构建
@@ -18,7 +18,7 @@ class Alarm: Component {
         guard let rawValue = icalcomponent_new_from_string(value) else {
             throw icalerror.illegal(value)
         }
-        guard icalcomponent_isa(rawValue).hub.wrap() == .VALARM else {
+        guard icalcomponent_isa(rawValue).hub.wrap() == .VPATCH else {
             throw icalerror.mismatch(value)
         }
         self.init(rawValue)
@@ -26,6 +26,7 @@ class Alarm: Component {
     
     /// 构建
     public convenience init() {
-        self.init(icalcomponent_new_valarm())
+        self.init(icalcomponent_new(Wrap<icalcomponent_kind>.VPATCH.rawValue))
     }
+    
 }

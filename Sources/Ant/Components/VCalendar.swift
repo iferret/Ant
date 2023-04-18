@@ -1,5 +1,5 @@
 //
-//  FreeBusy.swift
+//  Calendar.swift
 //  
 //
 //  Created by iferret's on 2023/4/17.
@@ -8,8 +8,9 @@
 import UIKit
 import libical
 
-public class FreeBusy: Component {
-
+public class VCalendar: Component {
+    
+    
     // MARK: 生命周期
     
     /// 构建
@@ -18,7 +19,7 @@ public class FreeBusy: Component {
         guard let rawValue = icalcomponent_new_from_string(value) else {
             throw icalerror.illegal(value)
         }
-        guard icalcomponent_isa(rawValue).hub.wrap() == .VFREEBUSY else {
+        guard icalcomponent_isa(rawValue).hub.wrap() == .VCALENDAR else {
             throw icalerror.mismatch(value)
         }
         self.init(rawValue)
@@ -26,7 +27,6 @@ public class FreeBusy: Component {
     
     /// 构建
     public convenience init() {
-        self.init(icalcomponent_new(Wrap<icalcomponent_kind>.VFREEBUSY.rawValue))
+        self.init(icalcomponent_new_vcalendar())
     }
-    
 }
