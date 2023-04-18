@@ -41,12 +41,12 @@ extension CompatbileWrapper where Base == icaltimetype {
     internal func wrap() -> Date {
         let cmpts: DateComponents = .init(calendar: .autoupdatingCurrent,
                                           timeZone: icaltime_get_timezone(base)?.hub.timeZone ?? .UTC,
-                                          year: Int(base.day),
-                                          month: Int(base.month),
-                                          day: Int(base.day),
-                                          hour: Int(base.hour),
-                                          minute: Int(base.minute),
-                                          second: Int(base.second))
+                                          year:     Int(base.year),
+                                          month:    Int(base.month),
+                                          day:      Int(base.day),
+                                          hour:     Int(base.hour),
+                                          minute:   Int(base.minute),
+                                          second:   Int(base.second))
         return cmpts.date ?? .init()
     }
 }
