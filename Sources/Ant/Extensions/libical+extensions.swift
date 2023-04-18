@@ -32,7 +32,9 @@ func icalcomponent_get_array_component(from cmpt: icalcomponent, kind: icalcompo
         elements.append(first)
     }
     while let next = icalcomponent_get_next_component(cmpt, kind) {
-        elements.append(next)
+        if elements.contains(next) == false {
+            elements.append(next)
+        }
     }
     return elements
 }
@@ -48,7 +50,9 @@ func icalcomponent_get_array_property(from cmpt: icalcomponent, kind: icalproper
         elements.append(first)
     }
     while let next = icalcomponent_get_next_property(cmpt, kind) {
-        elements.append(next)
+        if elements.contains(next) == false {
+            elements.append(next)
+        }
     }
     return elements
 }
@@ -64,7 +68,9 @@ func icalproperty_get_array_parameter(from property: icalproperty, kind: icalpar
         elements.append(first)
     }
     while let next = icalproperty_get_next_parameter(property, kind) {
-        elements.append(next)
+        if elements.contains(next) == false {
+            elements.append(next)
+        }
     }
     return elements
 }
