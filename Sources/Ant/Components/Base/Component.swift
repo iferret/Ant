@@ -95,6 +95,10 @@ extension Component {
         }
     }
     
+    /// String
+    public override var description: String {
+        return icalFormat()
+    }
 }
 
 extension Component {

@@ -48,10 +48,29 @@ public class Parameter: NSObject {
     public convenience init(other: Parameter) {
         self.init(icalparameter_new_clone(other.origin))
     }
-    
+
     /// 析构函数
     deinit {
         icalparameter_free(origin)
+    }
+    
+}
+
+extension Parameter {
+    
+    /// icalFormat
+    /// - Returns: String
+    public func icalFormat() -> String {
+        if let value = icalparameter_as_ical_string(origin) {
+            return .init(cString: value)
+        } else {
+            return ""
+        }
+    }
+    
+    /// String
+    public override var description: String {
+        return icalFormat()
     }
 }
 

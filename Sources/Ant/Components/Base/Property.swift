@@ -67,6 +67,25 @@ public class Property: NSObject {
 
 extension Property {
     
+    /// icalFormat
+    /// - Returns: String
+    public func icalFormat() -> String {
+        if let value = icalproperty_as_ical_string(origin) {
+            return .init(cString: value)
+        } else {
+            return ""
+        }
+    }
+    
+    /// String
+    public override var description: String {
+        return icalFormat()
+    }
+    
+}
+
+extension Property {
+    
     /// icalproperty_set_value
     /// - Parameter value: Value
     public func setValue(_ value: Value) {
