@@ -49,11 +49,6 @@ public class Parameter: NSObject {
         self.init(icalparameter_new_clone(other.origin))
     }
 
-    /// 析构函数
-    deinit {
-        icalparameter_free(origin)
-    }
-    
 }
 
 extension Parameter {

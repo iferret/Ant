@@ -58,11 +58,7 @@ public class Property: NSObject {
     public convenience init(other: Property) {
         self.init(icalproperty_new_clone(other.origin))
     }
-    
-    /// 析构函数
-    deinit {
-        icalproperty_free(origin)
-    }
+
 }
 
 extension Property {

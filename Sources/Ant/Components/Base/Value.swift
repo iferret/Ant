@@ -28,10 +28,7 @@ public class Value: NSObject {
     internal init(_ rawValue: icalvalue) {
         self.origin = rawValue
     }
-    
-    deinit {
-        icalvalue_free(origin)
-    }
+
 }
 
 extension Value {
