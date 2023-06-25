@@ -55,7 +55,9 @@ public class Component: CustomStringConvertible {
     
     /// 析构函数
     deinit {
-        icalcomponent_free(origin)
+        if icalcomponent_is_valid(origin) > 0 {
+            icalcomponent_free(origin)
+        }
     }
     
 }

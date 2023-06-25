@@ -23,6 +23,7 @@ let package = Package(
         ]),
         .target(name: "Ant", dependencies: ["libical"], resources: [.copy("../../libical/zoneinfo")]),
         .testTarget(name: "AntTests", dependencies: ["Ant"]),
-    ]
+    ],
+    cLanguageStandard: .c11
 )
 
